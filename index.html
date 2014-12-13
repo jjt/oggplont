@@ -82,7 +82,7 @@
           $oggplontMaster = doc.createElement('div'),
           winW = window.innerWidth,
           winH = window.innerHeight,
-          oggplontSize = 360,
+          oggplontSize = Math.floor(winH / 3),
           spawnOggplont;
 
       $oggplontMaster.innerHTML = oggplontTmpl;
