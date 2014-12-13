@@ -1,8 +1,9 @@
+<!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>OGGPLONT</title>
-</head>
-<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     html, body {
       margin: 0;
@@ -11,6 +12,13 @@
       width: 100%;
       overflow: hidden;
       background: #f6f6ff;
+    }
+
+    .stage {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
     }
 
     .oggplont {
@@ -35,6 +43,9 @@
     }
 
   </style>
+</head>
+<body>
+  <div class="stage"></div>
   <script type="text/tmpl" id="oggplontTmpl">
     <svg class="oggplont rotating" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="レイヤー_1" x="0px" y="0px" width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
       <g>
@@ -51,7 +62,7 @@
     </svg>
   </script>
   <script>
-    (function(win, doc, body){
+    (function(win, doc, $stage){
 
       function rand(min, max) {
         return Math.random() * (max - min) + min;
@@ -94,9 +105,9 @@
           transitionDuration: duration + 's'
         });
 
-        $oggplontFg.style.opacity = scale + 0.2;
+        $oggplontFg.style.opacity = scale * 1.3;
 
-        body.appendChild($oggplont);
+        $stage.appendChild($oggplont);
 
         // Wait a tick, then set final coords for animation
         setTimeout(function(){
@@ -106,7 +117,7 @@
 
         // Remove oggplonts after they're off-screen
         setTimeout(function(){
-          body.removeChild($oggplont);
+          $stage.removeChild($oggplont);
           delete $oggplont;
         }, duration * 1000 + 18);
 
@@ -116,7 +127,7 @@
 
       spawnOggplont(true);
 
-    })(window, window.document, window.document.querySelector('body'));
+    })(window, window.document, window.document.querySelector('.stage'));
   </script>
 </body>
 </html>
