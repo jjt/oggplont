@@ -74,8 +74,9 @@
 
       function styleEl(el, styleMap) {
         // Don't be a dick by making me check for hasOwnProperty here
-        for(k in styleMap)
+        for(k in styleMap) {
           el.style[k] = styleMap[k];
+        }
       }
 
       var oggplontTmpl = doc.querySelector('#oggplontTmpl').innerHTML,
@@ -97,10 +98,10 @@
             size = Math.round(oggplontSize * scale);
 
         styleEl($oggplont, {
-          top: randInt(-size / 4, winH + size / 4),
-          right: -size,
-          width: size,
-          height: size,
+          top: randInt(-size / 4, winH + size / 4) + 'px',
+          right: -size + 'px',
+          width: size + 'px',
+          height: size + 'px',
           zIndex: size,
           transitionDuration: duration + 's'
         });
@@ -111,8 +112,11 @@
 
         // Wait a tick, then set final coords for animation
         setTimeout(function(){
-          $oggplont.style.webkitTransform =
-            'translate(' + -(winW + size * 2) + 'px, 0)';
+          var trans = 'translate(' + -(winW + size * 2) + 'px, 0)';
+          styleEl($oggplont, {
+            webkitTransform: trans,
+            transform: trans
+          });
         }, 18);
 
         // Remove oggplonts after they're off-screen
